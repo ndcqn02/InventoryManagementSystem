@@ -17,7 +17,6 @@ import {
     UserCircleIcon,
     Cog6ToothIcon,
     PowerIcon,
-    ShoppingCartIcon,
     DocumentTextIcon,
 } from '@heroicons/react/24/solid';
 import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
@@ -36,7 +35,7 @@ function Sidebar() {
             <Card className="block fixed top-20 h-[calc(100vh-2rem)] w-full max-w-[18rem] p-2 shadow-xl shadow-blue-gray-900/5">
                 <div className="mb-2 p-4">
                     <Typography variant="h5" color="blue-gray">
-                        Người quản lý
+                        Nhân viên
                     </Typography>
                 </div>
                 <List>
@@ -77,7 +76,7 @@ function Sidebar() {
 
                         <AccordionBody className="py-1">
                             <List className="p-0">
-                                <Link to="/manager/all-product">
+                                <Link to="/staff/all-product">
                                     <ListItem>
                                         <ListItemPrefix>
                                             <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -85,7 +84,7 @@ function Sidebar() {
                                         Tất cả sản phẩm
                                     </ListItem>
                                 </Link>
-                                <Link to="/manager/product-catalog">
+                                <Link to="/staff/product-catalog">
                                     <ListItem>
                                         <ListItemPrefix>
                                             <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -96,16 +95,7 @@ function Sidebar() {
                             </List>
                         </AccordionBody>
                     </Accordion>
-                    <Link to="/manager/orders">
-                        <ListItem>
-                            <ListItemPrefix>
-                                <ShoppingCartIcon className="h-5 w-5" />
-                            </ListItemPrefix>
-                            <Typography color="blue-gray" className="mr-auto font-normal">
-                                Đơn hàng
-                            </Typography>
-                        </ListItem>
-                    </Link>
+                   
                     <Accordion
                         open={open === 1}
                         icon={
@@ -129,7 +119,7 @@ function Sidebar() {
 
                         <AccordionBody className="py-1">
                             <List className="p-0">
-                                <Link to="/manager/purchase-order">
+                                <Link to="/staff/purchase-order">
                                     <ListItem>
                                         <ListItemPrefix>
                                             <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -137,7 +127,7 @@ function Sidebar() {
                                         Phiếu nhập
                                     </ListItem>
                                 </Link>
-                                <Link to="/manager/export-order">
+                                <Link to="/staff/export-order">
                                     <ListItem>
                                         <ListItemPrefix>
                                             <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -145,7 +135,7 @@ function Sidebar() {
                                         Phiếu xuất
                                     </ListItem>
                                 </Link>
-                                <Link to="/manager/return-order">
+                                <Link to="/staff/return-order">
                                     <ListItem>
                                         <ListItemPrefix>
                                             <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -158,8 +148,8 @@ function Sidebar() {
                     </Accordion>
 
                     <hr className="my-2 border-blue-gray-50" />
-                   
-                    <Link to="/manager/profile">
+                  
+                    <Link to="/staff/profile">
                         <ListItem>
                             <ListItemPrefix>
                                 <UserCircleIcon className="h-5 w-5" />
