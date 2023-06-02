@@ -160,7 +160,7 @@ function Products() {
                </button>
             </form>
          ) : (
-            <Card className="block h-full w-full max-w-screen-2xl">
+            <Card className="block fixed top-20  h-full w-full max-w-screen-2xl">
                <CardHeader floated={false} shadow={false} className="rounded-none">
                   <div className="mb-8 flex items-center justify-between gap-8">
                      <div>

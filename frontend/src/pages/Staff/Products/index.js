@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { PencilIcon, PlusIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/solid';
+import { PencilIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import {
    Card,
    CardHeader,
@@ -67,13 +67,14 @@ const TABLE_ROWS = [
       exported: false,
       date: '04/10/21',
    },
+   
 ];
 
 function Products() {
 
    return (
       <div className="wrapper">
-         <Card className="block h-full w-full max-w-screen-2xl">
+         <Card className="block fixed  h-full w-full max-w-screen-2xl">
             <CardHeader floated={false} shadow={false} className="rounded-none">
                <div className="mb-8 flex items-center justify-between gap-8">
                   <div>

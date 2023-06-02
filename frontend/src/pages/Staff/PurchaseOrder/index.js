@@ -86,7 +86,7 @@ function PurchaseOrder() {
 
          {isOpen ? (
             <form>
-            <Card className="block   h-full w-1/2">
+            <Card className="block fixed top-20  h-full w-1/2">
                <div className="border-b m-4 p-4 border-gray-900/10 pb-12">
                   <h2 className="text-base font-semibold leading-7 text-gray-900">Tạo mới phiếu nhập </h2>
 

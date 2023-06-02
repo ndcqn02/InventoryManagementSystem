@@ -42,7 +42,7 @@ function Header() {
                         <ul className="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full ml-1">
                             <li className="flex items-center mr-2">
                                 <a
-                                    href="./pages/sign-in.html"
+                                    href="/sign-in"
                                     className="block in px-0 py-2 text-sm font-semibold text-black transition-all ease-nav-brand"
                                 >
                                     <UserIcon className="h-5 w-5 inline" />

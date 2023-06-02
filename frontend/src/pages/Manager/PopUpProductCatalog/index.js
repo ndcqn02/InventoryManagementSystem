@@ -59,7 +59,7 @@ const TABLE_ROWS = [
 function ProductCatalog() {
    return (
       <div className="wrapper">
-         <div class="flex flex-wrap -mx-3 py-6">
+         <div class="flex  flex-wrap -mx-3 py-6 ">
             <div class="grid grid-cols-3 gap-4 w-full max-w-full px-3 mt-6 shrink-0  md:flex-0 md:mt-0">
                <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                   <Typography className="pt-6 pl-6" variant="h6" color="blue-gray">

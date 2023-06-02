@@ -5,7 +5,7 @@ import Sidebar from './Sidebar';
 
 const cx = classNames.bind(styles);
 
-function DefaultLayout({ children }) {
+function AdminLayout({ children }) {
    return (
       <div>
          <Header />
@@ -17,4 +17,4 @@ function DefaultLayout({ children }) {
    );
 }
 
-export default DefaultLayout;
+export default AdminLayout;

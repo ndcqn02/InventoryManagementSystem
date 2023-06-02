@@ -106,7 +106,7 @@ function Orders() {
                         <Tabs value="all" className="w-full md:w-max">
                             <TabsHeader>
                                 {TABS.map(({ label, value }) => (
-                                    <Tab key={value} value={value}>
+                                    <Tab key={value} value={value} className="w-fit">
                                         &nbsp;&nbsp;{label}&nbsp;&nbsp;
                                     </Tab>
                                 ))}

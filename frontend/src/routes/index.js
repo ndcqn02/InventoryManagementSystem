@@ -1,4 +1,4 @@
-import { AdminLayout, StaffLayout, SupplierLayout } from '~/components/Layout'
+import { AdminLayout, CustomerLayout, StaffLayout, SupplierLayout } from '~/components/Layout'
 import Home from '~/pages/Manager/Home'
 import Profile from '~/pages/Manager/Profile'
 import ProfileStaff from '~/pages/Staff/Profile'
@@ -29,6 +29,9 @@ import AccountsAdmin from '~/pages/Admin/Accounts'
 import AccountTypesAdmin from '~/pages/Admin/AccountTypes'
 import Cart from '~/pages/Customer/Cart'
 import SignIn from '~/pages/Customer/Signin'
+import Signup from '~/pages/Customer/Signup'
+import Product from '~/pages/Customer/Product'
+import ProductDetail from '~/pages/Customer/ProductDetail'
 
 
 
@@ -36,12 +39,13 @@ import SignIn from '~/pages/Customer/Signin'
 const publicRoutes = [
 
     //Route customer
-    {path: '/', component: Home, layout: null},
-    {path: '/cart', component: Cart, layout: null},
-    {path: '/sign-in', component: SignIn, layout: null},
+    {path: '/cart', component: Cart, layout: CustomerLayout},
+    {path: '/sign-in', component: SignIn, layout: CustomerLayout},
+    {path: '/sign-up', component: Signup, layout: CustomerLayout},
+    {path: '/', component: Product, layout: CustomerLayout},
+    {path: '/product/detail', component: ProductDetail, layout: CustomerLayout},
 
-    //Route manager
-    
+    //Route manager 
     {path: '/manager/profile', component: Profile},
     {path: '/manager/orders', component: Orders},
     {path: '/manager/purchase-order', component: PurchaseOrder},
