@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-
 const customer = {
    maKhachHang: 'KH01',
    maTaiKhoan: 'KH02',
@@ -13,11 +12,13 @@ const customer = {
 
 const currentDateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
+
 const Cart = () => {
    const [itemsCart, setItemsCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
    const [address, setAddress] = useState(customer.diaChi);
    const [name, setName] = useState(customer.hoVaTen);
    const [phoneNumber, setPhoneNumber] = useState(customer.sdt);
+   let total = 0;
 
    const value = {
       maKhachHang: customer.maKhachHang,
@@ -25,6 +26,24 @@ const Cart = () => {
       diaChiGiaoHang: address,
       trangThaiDonHang: 'Chưa giao',
       itemsCart: itemsCart,
+   };
+
+   const handleQuantityUpdate = (index, newQuantity, update) => {
+      if (index >= 0 && index < itemsCart.length) {
+         const updatedProducts = [...itemsCart];
+         const quantity = parseInt(updatedProducts[index].soLuongDat);
+
+         console.log('update: ', update)
+         console.log(typeof(update))
+         if ((update === 'increase' && quantity >= 1) || (update === 'decrease' && quantity > 1 ) || update == null)  {
+            updatedProducts[index].soLuongDat = newQuantity;
+            setItemsCart(updatedProducts);
+            localStorage.setItem('cart', JSON.stringify(updatedProducts));
+            console.log(updatedProducts);
+         }
+      } else {
+         console.log('Invalid index');
+      }
    };
 
    const handleOrder = async () => {
@@ -41,22 +60,15 @@ const Cart = () => {
          });
    };
 
-   // useEffect(() => {
-   //    setItemsCart(JSON.parse(localStorage.getItem('cart')));
-   //    console.log("goi lan useEffect")
-   // },[itemsCart.length]);
-
-
    const handleRemoveItem = (index) => {
       if (index >= 0 && index < itemsCart.length) {
-         itemsCart.splice(index, 1);       
+         itemsCart.splice(index, 1);
          localStorage.setItem('cart', JSON.stringify(itemsCart));
          setItemsCart(JSON.parse(localStorage.getItem('cart')));
-       
-       } else {
+      } else {
          console.log('Invalid index');
-       }
-   }
+      }
+   };
 
    return (
       <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
@@ -86,6 +98,7 @@ const Cart = () => {
                         </div>
 
                         {itemsCart.map((item, index) => {
+                           total = total +  item.soLuongDat * item.giaBan
                            return (
                               <div key={index} className="flex items-center hover:bg-white -mx-6 px-6 py-5 border-b">
                                  <div className="flex w-2/5">
@@ -101,6 +114,7 @@ const Cart = () => {
                                     <svg
                                        className="fill-current text-gray-600 w-3 hover:text-blue-700"
                                        viewBox="0 0 448 512"
+                                       onClick={() => handleQuantityUpdate(index, item.soLuongDat - 1, 'decrease')}
                                     >
                                        <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                                     </svg>
@@ -108,19 +122,21 @@ const Cart = () => {
                                     <input
                                        className="mx-2 border text-center w-8"
                                        type="text"
-                                       defaultValue={item.soLuongDat}
+                                       value={item.soLuongDat}
+                                       onChange={(event) => handleQuantityUpdate(index, event.target.value)}
                                     />
 
                                     <svg
                                        className="fill-current text-gray-600 w-3 hover:text-blue-700"
                                        viewBox="0 0 448 512"
+                                       onClick={() => handleQuantityUpdate(index, item.soLuongDat + 1, 'increase')}
                                     >
                                        <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                                     </svg>
                                  </div>
-                                 <span className="text-center w-1/5 font-semibold text-sm">{item.giaBan}</span>
+                                 <span className="text-center w-1/5 font-semibold text-sm">{(item.giaBan).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                  <span className="text-center w-1/5 font-semibold text-sm">
-                                    {item.giaBan * item.soLuong}
+                                    {(item.giaBan * item.soLuongDat).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }
                                  </span>
                                  <span className="w-1/5 flex align-center justify-center ">
                                     <svg
@@ -130,7 +146,7 @@ const Cart = () => {
                                        strokeWidth={1.5}
                                        stroke="currentColor"
                                        className="w-6 h-6 hover:text-red-500"
-                                       onClick={()=> handleRemoveItem(index)}
+                                       onClick={() => handleRemoveItem(index)}
                                     >
                                        <path
                                           strokeLinecap="round"
@@ -194,7 +210,7 @@ const Cart = () => {
                      </div>
                      <div className="flex justify-between items-center w-full">
                         <p className="text-base font-semibold leading-4 text-gray-800">Tổng tiền</p>
-                        <p className="text-base font-semibold leading-4 text-gray-600">60.000.000 VND</p>
+                        <p className="text-base font-semibold leading-4 text-gray-600">{ total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
                      </div>
                   </div>
                   <div className="flex flex-col rounded-lg justify-center px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6   ">

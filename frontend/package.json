@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "currency.js": "^2.0.4",
     "customize-cra": "^1.0.0",
     "normalize.css": "^8.0.1",
     "number-format.js": "^2.0.9",

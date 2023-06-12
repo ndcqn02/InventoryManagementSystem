@@ -43,10 +43,9 @@ function ProductDetail() {
                   </p>
                   <h2 className="text-4xl">{product.tenSanPham}</h2>
                   <span className="font-semibold">
-                     Giá:{' '}
+                     Giá:
                      <span className="text-2xl">
-                        {product.giaBan}
-                        VND
+                        {parseInt(product.giaBan).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                      </span>
                   </span>
                   <div className="flex flex-col gap-2">
