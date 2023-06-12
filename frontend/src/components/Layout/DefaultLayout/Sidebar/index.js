@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
-import React from 'react';
+import React  from 'react';
 import {
     Card,
     Typography,
@@ -12,7 +12,6 @@ import {
     AccordionBody,
 } from '@material-tailwind/react';
 import {
-    PresentationChartBarIcon,
     ShoppingBagIcon,
     UserCircleIcon,
     Cog6ToothIcon,
@@ -40,20 +39,7 @@ function Sidebar() {
                     </Typography>
                 </div>
                 <List>
-                    <Accordion
-             
-                    >
-                        <Link to="/">
-                            <ListItem>
-                                <ListItemPrefix>
-                                    <PresentationChartBarIcon className="h-5 w-5" />
-                                </ListItemPrefix>
-                                <Typography color="blue-gray" className="mr-auto font-normal">
-                                    Dashboard
-                                </Typography>
-                            </ListItem>
-                        </Link>
-                    </Accordion>
+                  
                     <Accordion
                         open={open === 2}
                         icon={
@@ -129,7 +115,7 @@ function Sidebar() {
 
                         <AccordionBody className="py-1">
                             <List className="p-0">
-                                <Link to="/manager/purchase-order">
+                                <Link to="/manager/import-order">
                                     <ListItem>
                                         <ListItemPrefix>
                                             <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />

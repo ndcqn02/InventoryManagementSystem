@@ -21,7 +21,7 @@ function HeaderCustomer() {
                         <li className="mx-4 font-bold text-lg hover:text-blue-500">Trang chủ</li>
                      </NavLink>
                      <NavLink to="/">
-                        <li className="mx-4 font-bold text-lg hover:text-blue-500">Sản phẩm</li>
+                        <li className="mx-4 font-bold text-lg hover:text-blue-500">Danh mục sản phẩm</li>
                      </NavLink>
                      <NavLink to="/">
                         <li className="mx-4 font-bold text-lg hover:text-blue-500">Liên hệ</li>

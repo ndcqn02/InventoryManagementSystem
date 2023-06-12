@@ -4,7 +4,7 @@ import Profile from '~/pages/Manager/Profile'
 import ProfileStaff from '~/pages/Staff/Profile'
 import Upload from '~/pages/Manager/Upload'
 import Orders from '~/pages/Manager/Orders'
-import PurchaseOrder from '~/pages/Manager/PurchaseOrder'
+import ImportOrder from '~/pages/Manager/ImportOrder'
 import PurchaseOrderStaff from '~/pages/Staff/PurchaseOrder'
 import PurchaseOrderSupplier from '~/pages/Supplier/PurchaseOrder'
 import ExportOrder from '~/pages/Manager/ExportOrder'
@@ -14,7 +14,7 @@ import ProductsStaff from '~/pages/Staff/Products'
 import ProductCatalog from '~/pages/Manager/ProductCatalog'
 import ProductCatalogStaff from '~/pages/Staff/ProductCatalog'
 import AddNewProduct from '~/pages/Manager/AddNewProduct'
-import PopUpProductCatalog from '~/pages/Manager/PopUpProductCatalog'
+import ImportOrderDetail from '~/pages/Manager/ImportOrderDetail'
 import PopUpProductCatalogStaff from '~/pages/Staff/PopUpProductCatalog'
 import PurchaseOrderDetailSupplier from '~/pages/Supplier/PopUpProductCatalog'
 import ReturnOrder from '~/pages/Manager/ReturnOrder'
@@ -39,21 +39,22 @@ import ProductDetail from '~/pages/Customer/ProductDetail'
 const publicRoutes = [
 
     //Route customer
+    {path: '/', component: Product, layout: CustomerLayout},
     {path: '/cart', component: Cart, layout: CustomerLayout},
     {path: '/sign-in', component: SignIn, layout: CustomerLayout},
     {path: '/sign-up', component: Signup, layout: CustomerLayout},
-    {path: '/', component: Product, layout: CustomerLayout},
-    {path: '/product/detail', component: ProductDetail, layout: CustomerLayout},
+    {path: '/product/detail/:maSanPham', component: ProductDetail, layout: CustomerLayout},
 
     //Route manager 
+    {path: '/manager', component: Home},
     {path: '/manager/profile', component: Profile},
     {path: '/manager/orders', component: Orders},
-    {path: '/manager/purchase-order', component: PurchaseOrder},
+    {path: '/manager/import-order', component: ImportOrder},
     {path: '/manager/export-order', component: ExportOrder},
     {path: '/manager/all-product', component: Products},
     {path: '/manager/product-catalog', component: ProductCatalog},
     {path: '/manager/add-new-products', component: AddNewProduct},
-    {path: '/manager/popup-product-catalog', component: PopUpProductCatalog},
+    {path: '/manager/import-order-detail/:maPhieuNhap', component: ImportOrderDetail},
     {path: '/manager/export-request', component: ExportRequest},
     {path: '/manager/return-order', component: ReturnOrder},
     {path: '/manager/return-order-detail', component: ReturnOrderDetail},

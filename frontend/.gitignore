@@ -1,5 +1,16 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+
+
+# backend
+
+../backend/node_modueles
+../backend/.vendor
+../backend/package-lock.json
+
+/vendor
+/.idea
+.iead/
 # dependencies
 /node_modules
 /.pnp

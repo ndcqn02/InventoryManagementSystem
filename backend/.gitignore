@@ -1,0 +1,6 @@
+/node_modueles
+/vendor
+/.idea
+.iead/
+.env
+package-lock.json
