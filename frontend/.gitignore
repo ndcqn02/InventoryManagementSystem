@@ -4,7 +4,7 @@
 
 # backend
 
-../backend/node_modueles
+../backend/node_modueles/
 ../backend/.vendor
 ../backend/package-lock.json
 
