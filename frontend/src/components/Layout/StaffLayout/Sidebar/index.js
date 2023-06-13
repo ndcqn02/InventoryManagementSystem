@@ -39,20 +39,7 @@ function Sidebar() {
                     </Typography>
                 </div>
                 <List>
-                    <Accordion
-             
-                    >
-                        <Link to="/">
-                            <ListItem>
-                                <ListItemPrefix>
-                                    <PresentationChartBarIcon className="h-5 w-5" />
-                                </ListItemPrefix>
-                                <Typography color="blue-gray" className="mr-auto font-normal">
-                                    Dashboard
-                                </Typography>
-                            </ListItem>
-                        </Link>
-                    </Accordion>
+                    
                     <Accordion
                         open={open === 2}
                         icon={

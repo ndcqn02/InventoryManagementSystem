@@ -44,6 +44,7 @@ let createOrder = async (req, res) => {
   const { maKhachHang, ngayTaoDonHang, diaChiGiaoHang, trangThaiDonHang } =
     req.body;
   const itemsCart = req.body.itemsCart;
+  console.log('backend items cart', itemsCart)
 
   const maDonDatHang = "DH" + uuidv4().substring(0, 18);
   const maChiTietDonHang = () => {

@@ -39,7 +39,7 @@ function Sidebar() {
                     </Typography>
                 </div>
                 <List>
-                    <Accordion
+                    {/* <Accordion
              
                     >
                         <Link to="/">
@@ -52,7 +52,7 @@ function Sidebar() {
                                 </Typography>
                             </ListItem>
                         </Link>
-                    </Accordion>
+                    </Accordion> */}
            
                    
                     <Accordion

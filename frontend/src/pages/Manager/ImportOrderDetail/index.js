@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Card, CardHeader, Typography, CardBody, Chip, CardFooter } from '@material-tailwind/react';
+import { Card, CardHeader, Typography, CardBody, Chip } from '@material-tailwind/react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -63,9 +63,10 @@ const TABLE_HEAD = ['Mã sản phẩm', 'Sản phẩm', 'Số lượng'];
 function ImportOrderDetail() {
    const { maPhieuNhap } = useParams();
    const [info, setInfo] = useState([]);
+   const [status, setStatus] = useState(0);
    const [product, setProduct] = useState([]);
 
-   //get api info nhanvien va info don hang
+   // get api info nhanvien va info don hang
    useEffect(() => {
       axios
          .get(`http://localhost:8080/api/v1/import-order-detail/${maPhieuNhap}`)
@@ -73,7 +74,7 @@ function ImportOrderDetail() {
             setInfo(res.data.data);
          })
          .catch((err) => console.log(err));
-   }, [info, maPhieuNhap]);
+   }, [status, maPhieuNhap]);
 
    //get api chi tiet phieu nhap hang gom nhung san pham nao
    useEffect(() => {
@@ -92,6 +93,7 @@ function ImportOrderDetail() {
          .put('http://localhost:8080/api/v1/approve-the-import-request', value)
          .then((res) => {
             toast.success('Duyệt đơn hàng thành công!');
+            setStatus(1);
          })
          .catch((err) => {
             console.log('loi roi ma oi');
@@ -105,6 +107,7 @@ function ImportOrderDetail() {
          .put('http://localhost:8080/api/v1/reject-the-import-request', value)
          .then((res) => {
             toast.info('Đã từ chối nhập hàng!');
+            setStatus(0);
          })
          .catch((err) => {
             console.error(err);
@@ -114,16 +117,19 @@ function ImportOrderDetail() {
    return (
       <div className="wrapper">
          <div className="flex  flex-wrap -mx-3 py-6 ">
-            {info.map((item) => {
+            {info.map((item, index) => {
                return (
-                  <div className="grid grid-cols-3 gap-4 w-full max-w-full px-3 mt-6 shrink-0  md:flex-0 md:mt-0">
+                  <div
+                     key={index}
+                     className="grid grid-cols-3 gap-4 w-full max-w-full px-3 mt-6 shrink-0  md:flex-0 md:mt-0"
+                  >
                      <div className="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                         <Typography className="pt-6 pl-6" variant="h6" color="blue-gray">
                            Nhân viên
                         </Typography>
                         <div className="max-w-full p-6 pt-0 pb-6 mt-6 grid grid-cols-2 gap-4 ">
                            <h3>Nhân viên tạo:</h3>
-                           <p className="text-right">{item.maNhanVien}</p>
+                           <p className="text-right">{item.hoVaTenNV}</p>
 
                            <p>Ghi chú:</p>
                            <p className="text-right">{item.ghiChu}</p>
@@ -155,7 +161,7 @@ function ImportOrderDetail() {
                            <div className="text-right">{item.maPhieuNhap}</div>
 
                            <div>Nhà cung cấp: </div>
-                           <div className="text-right">{item.maNhaCungCap}</div>
+                           <div className="text-right">{item.hoVaTenNCC}</div>
 
                            <div>Ngày tạo : </div>
                            <div className="text-right">{new Date(item.thoiGianTao).toLocaleString()}</div>
@@ -244,39 +250,6 @@ function ImportOrderDetail() {
                                     </tr>
                                  );
                               })}
-
-                              {/* {TABLE_ROWS.map(({ orderId, img, name, email, job, org, exported, quantity }, index) => {
-                                 const isLast = index === TABLE_ROWS.length - 1;
-                                 const classes = isLast ? 'p-4' : 'p-4 border-b border-blue-gray-50';
-
-                                 return (
-                                    <tr key={index}>
-                                       <td className={classes}>
-                                          <div className="flex flex-col">
-                                             <Typography variant="small" color="blue-gray" className="font-normal">
-                                                {orderId}
-                                             </Typography>
-                                          </div>
-                                       </td>
-                                       <td className={classes}>
-                                          <div className="flex items-center gap-3">
-                                             <img className="h-16 " src={img} alt={name} size="sm" />
-                                             <div className="flex flex-col">
-                                                <Typography variant="small" color="blue-gray" className="font-normal">
-                                                   {name}
-                                                </Typography>
-                                             </div>
-                                          </div>
-                                       </td>
-
-                                       <td className={classes}>
-                                          <Typography variant="small" color="blue-gray" className="font-normal">
-                                             {quantity}
-                                          </Typography>
-                                       </td>
-                                    </tr>
-                                 );
-                              })} */}
                            </tbody>
                         </table>
                      </CardBody>

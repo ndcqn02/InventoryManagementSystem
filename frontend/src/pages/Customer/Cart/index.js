@@ -10,8 +10,7 @@ const customer = {
    hinhAnh: '',
 };
 
-const currentDateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
+const currentDateTime = () => new Date().toISOString().slice(0, 19).replace('T', ' ');
 
 const Cart = () => {
    const [itemsCart, setItemsCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
@@ -20,9 +19,10 @@ const Cart = () => {
    const [phoneNumber, setPhoneNumber] = useState(customer.sdt);
    let total = 0;
 
+
    const value = {
       maKhachHang: customer.maKhachHang,
-      ngayTaoDonHang: currentDateTime,
+      ngayTaoDonHang: currentDateTime(),
       diaChiGiaoHang: address,
       trangThaiDonHang: 'Chưa giao',
       itemsCart: itemsCart,
@@ -32,11 +32,17 @@ const Cart = () => {
       if (index >= 0 && index < itemsCart.length) {
          const updatedProducts = [...itemsCart];
          const quantity = parseInt(updatedProducts[index].soLuongDat);
+         let updateQuantity = parseInt(newQuantity);
+         console.log(' updateQuantity', updateQuantity);
+         console.log('typeof updateQuantity', typeof updateQuantity);
+         if (Number.isNaN(updateQuantity)) {
+            updateQuantity = null;
+         }
 
-         console.log('update: ', update)
-         console.log(typeof(update))
-         if ((update === 'increase' && quantity >= 1) || (update === 'decrease' && quantity > 1 ) || update == null)  {
-            updatedProducts[index].soLuongDat = newQuantity;
+         console.log('update: ', update);
+         console.log(typeof update);
+         if ((update === 'increase' && quantity >= 1) || (update === 'decrease' && quantity > 1) || update == null) {
+            updatedProducts[index].soLuongDat = updateQuantity;
             setItemsCart(updatedProducts);
             localStorage.setItem('cart', JSON.stringify(updatedProducts));
             console.log(updatedProducts);
@@ -72,9 +78,6 @@ const Cart = () => {
 
    return (
       <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
-         <div className="flex justify-start item-start space-y-2 flex-col ">
-            <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800">Giỏ hàng</h1>
-         </div>
          <div className="mt-10 flex flex-col rounded xl:flex-row justify-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
             <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
                {/* Nội dung chi tiết sản phẩm */}
@@ -98,7 +101,7 @@ const Cart = () => {
                         </div>
 
                         {itemsCart.map((item, index) => {
-                           total = total +  item.soLuongDat * item.giaBan
+                           total = total + item.soLuongDat * item.giaBan;
                            return (
                               <div key={index} className="flex items-center hover:bg-white -mx-6 px-6 py-5 border-b">
                                  <div className="flex w-2/5">
@@ -134,9 +137,14 @@ const Cart = () => {
                                        <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                                     </svg>
                                  </div>
-                                 <span className="text-center w-1/5 font-semibold text-sm">{(item.giaBan).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                  <span className="text-center w-1/5 font-semibold text-sm">
-                                    {(item.giaBan * item.soLuongDat).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }
+                                    {item.giaBan.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                 </span>
+                                 <span className="text-center w-1/5 font-semibold text-sm">
+                                    {(item.giaBan * item.soLuongDat).toLocaleString('vi-VN', {
+                                       style: 'currency',
+                                       currency: 'VND',
+                                    })}
                                  </span>
                                  <span className="w-1/5 flex align-center justify-center ">
                                     <svg
@@ -210,7 +218,9 @@ const Cart = () => {
                      </div>
                      <div className="flex justify-between items-center w-full">
                         <p className="text-base font-semibold leading-4 text-gray-800">Tổng tiền</p>
-                        <p className="text-base font-semibold leading-4 text-gray-600">{ total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                        <p className="text-base font-semibold leading-4 text-gray-600">
+                           {total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                        </p>
                      </div>
                   </div>
                   <div className="flex flex-col rounded-lg justify-center px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6   ">

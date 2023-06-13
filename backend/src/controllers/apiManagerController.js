@@ -1,7 +1,12 @@
 import pool from "../config/db";
 
 let getAllPurchaseOrder = async (req, res) => {
-  const [rows] = await pool.execute("SELECT * FROM PhieuNhapHang");
+  const [rows] = await pool.query(
+    `SELECT pnh.*, ncc.hoVaTen as hoVaTenNCC, nv.hoVaTen as hoVaTenNV, nv.hinhAnh as hinhAnhNV
+    FROM PhieuNhapHang pnh
+    JOIN NhaCungCap ncc ON pnh.maNhaCungCap = ncc.maNhaCungCap
+    JOIN NhanVien nv ON pnh.maNhanVien = nv.maNhanVien`
+  );
   return res.status(200).json({
     message: "ok",
     data: rows,
@@ -12,7 +17,11 @@ let getPurchaseOrderDetail = async (req, res) => {
   try {
     const maPhieuNhap = req.params.maPhieuNhap;
     let [purchaseOrder] = await pool.execute(
-      "SELECT * FROM PhieuNhapHang where maPhieuNhap = ? ",
+      `SELECT pnh.*, ncc.hoVaTen as hoVaTenNCC, nv.hoVaTen as hoVaTenNV
+      FROM PhieuNhapHang pnh
+      JOIN NhaCungCap ncc ON pnh.maNhaCungCap = ncc.maNhaCungCap
+      JOIN NhanVien nv ON pnh.maNhanVien = nv.maNhanVien
+      WHERE maPhieuNhap = ? `,
       [maPhieuNhap]
     );
 

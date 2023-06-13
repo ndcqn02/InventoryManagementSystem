@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import React from 'react';
-import { UserIcon, BellAlertIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
+import { UserIcon, BellAlertIcon } from '@heroicons/react/24/solid';
 import { Link, NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -14,7 +14,8 @@ function HeaderCustomer() {
             navbar-scroll="false"
          >
             <div className="flex items-center justify-between w-full py-1 mx-auto flex-wrap-inherit">
-               <h2 className="mb-0 font-bold text-3xl text-black capitalize">CuongJohn</h2>
+               <img alt="logo" src="https://i.imgur.com/oE5Tzmg.png" />
+
                <nav>
                   <ul className="flex items-center ml-60">
                      <NavLink to="/">
@@ -54,7 +55,29 @@ function HeaderCustomer() {
                      </li>
                      <li className="relative flex items-center pr-2 p-3">
                         <Link to="/cart">
-                           <ShoppingCartIcon className="h-6 w-6" />
+                           {/* <ShoppingCartIcon className="h-6 w-6" /> */}
+                           
+                           <button
+                              className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
+                              aria-label="Cart"
+                           >
+                              <svg
+                                 className="h-6 w-6"
+                                 fill="none"
+                                 strokeLinecap="round"
+                                 strokeLinejoin="round"
+                                 strokeWidth="2"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                              >
+                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                              </svg>
+                              <span className="absolute inset-0 object-right-top -mr-6">
+                                 <div className="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
+                                    0
+                                 </div>
+                              </span>
+                           </button>
                         </Link>
                      </li>
                   </ul>
