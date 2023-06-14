@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { totalItemsCart } from '../../../redux/counter';
+
 const customer = {
    maKhachHang: 'KH01',
    maTaiKhoan: 'KH02',
@@ -10,7 +13,17 @@ const customer = {
    hinhAnh: '',
 };
 
-const currentDateTime = () => new Date().toISOString().slice(0, 19).replace('T', ' ');
+const currentDateTime = () => {
+   const now = new Date();
+   const year = now.getFullYear();
+   const month = String(now.getMonth() + 1).padStart(2, '0');
+   const day = String(now.getDate()).padStart(2, '0');
+   const hours = String(now.getHours()).padStart(2, '0');
+   const minutes = String(now.getMinutes()).padStart(2, '0');
+   const seconds = String(now.getSeconds()).padStart(2, '0');
+
+   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
 
 const Cart = () => {
    const [itemsCart, setItemsCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
@@ -18,7 +31,7 @@ const Cart = () => {
    const [name, setName] = useState(customer.hoVaTen);
    const [phoneNumber, setPhoneNumber] = useState(customer.sdt);
    let total = 0;
-
+   const dispatch = useDispatch();
 
    const value = {
       maKhachHang: customer.maKhachHang,
@@ -41,10 +54,11 @@ const Cart = () => {
 
          console.log('update: ', update);
          console.log(typeof update);
-         if ((update === 'increase' && quantity >= 1) || (update === 'decrease' && quantity > 1) || update == null) {
+         if ((update === 'increment' && quantity >= 1) || (update === 'decrement' && quantity > 1) || update == null) {
             updatedProducts[index].soLuongDat = updateQuantity;
             setItemsCart(updatedProducts);
             localStorage.setItem('cart', JSON.stringify(updatedProducts));
+            dispatch(totalItemsCart());
             console.log(updatedProducts);
          }
       } else {
@@ -59,6 +73,7 @@ const Cart = () => {
             console.log(res);
             localStorage.removeItem('cart');
             setItemsCart([]);
+            dispatch(totalItemsCart());
             toast.success('Đặt hàng thành công!');
          })
          .catch((err) => {
@@ -71,6 +86,7 @@ const Cart = () => {
          itemsCart.splice(index, 1);
          localStorage.setItem('cart', JSON.stringify(itemsCart));
          setItemsCart(JSON.parse(localStorage.getItem('cart')));
+         dispatch(totalItemsCart())
       } else {
          console.log('Invalid index');
       }
@@ -117,7 +133,7 @@ const Cart = () => {
                                     <svg
                                        className="fill-current text-gray-600 w-3 hover:text-blue-700"
                                        viewBox="0 0 448 512"
-                                       onClick={() => handleQuantityUpdate(index, item.soLuongDat - 1, 'decrease')}
+                                       onClick={() => handleQuantityUpdate(index, item.soLuongDat - 1, 'decrement')}
                                     >
                                        <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                                     </svg>
@@ -132,7 +148,7 @@ const Cart = () => {
                                     <svg
                                        className="fill-current text-gray-600 w-3 hover:text-blue-700"
                                        viewBox="0 0 448 512"
-                                       onClick={() => handleQuantityUpdate(index, item.soLuongDat + 1, 'increase')}
+                                       onClick={() => handleQuantityUpdate(index, item.soLuongDat + 1, 'increment')}
                                     >
                                        <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                                     </svg>

@@ -12,7 +12,6 @@ import {
     AccordionBody,
 } from '@material-tailwind/react';
 import {
-    PresentationChartBarIcon,
     ShoppingBagIcon,
     UserCircleIcon,
     Cog6ToothIcon,

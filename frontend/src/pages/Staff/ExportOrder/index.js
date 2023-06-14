@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { PencilIcon, EyeIcon, TrashIcon, PlusIcon } from '@heroicons/react/24/solid';
+import { EyeIcon } from '@heroicons/react/24/solid';
 import {
    Card,
    CardHeader,
@@ -81,7 +81,6 @@ function ExportOrder() {
                         Danh sách phiếu xuất hàng
                      </Typography>
                   </div>
-                
                </div>
                <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                   <div className="w-full md:w-72">
@@ -127,7 +126,6 @@ function ExportOrder() {
                                        <Typography variant="small" color="blue-gray" className="font-normal">
                                           {name}
                                        </Typography>
-                                    
                                     </div>
                                  </div>
                               </td>
@@ -136,7 +134,6 @@ function ExportOrder() {
                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                        {supplier}
                                     </Typography>
-                                 
                                  </div>
                               </td>
                               <td className={classes}>
@@ -167,7 +164,6 @@ function ExportOrder() {
                                        </IconButton>
                                     </Link>
                                  </Tooltip>
-                          
                               </td>
                            </tr>
                         );

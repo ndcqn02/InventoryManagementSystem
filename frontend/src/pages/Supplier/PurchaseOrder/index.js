@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import {  EyeIcon, PlusIcon } from '@heroicons/react/24/solid';
+import {  EyeIcon } from '@heroicons/react/24/solid';
 import {
    Card,
    CardHeader,
@@ -9,7 +9,6 @@ import {
    CardBody,
    Chip,
    CardFooter,
-   Avatar,
    IconButton,
    Tooltip,
 } from '@material-tailwind/react';
@@ -74,9 +73,9 @@ const TABLE_ROWS = [
 function PurchaseOrder() {
    const [isOpen, setIsOpen] = useState(false);
 
-   const handleOpenForm = () => {
-      setIsOpen(true);
-   };
+   // const handleOpenForm = () => {
+   //    setIsOpen(true);
+   // };
 
    const handleCloseForm = () => {
       setIsOpen(false);

@@ -2,12 +2,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux'
+import { totalItemsCart } from '../../../redux/counter'
 
 function ProductDetail() {
    const { maSanPham } = useParams();
    const [product, setProduct] = useState([]);
-
    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+   const dispatch = useDispatch()
 
    useEffect(() => {
       axios
@@ -22,6 +24,7 @@ function ProductDetail() {
 
    useEffect(() => {
       localStorage.setItem('cart', JSON.stringify(cart));
+      dispatch(totalItemsCart())
    }, [cart]);
 
    return (
@@ -49,7 +52,7 @@ function ProductDetail() {
                      </span>
                   </span>
                   <div className="flex flex-col gap-2">
-                     <h1 className="text-2xl">Tính năng</h1>
+                     <h1 className="text-2xl">Tính năng </h1>
                      <p className="text-gray-800">{product.moTa}</p>
                   </div>
                   <h3 className="flex justify-between text-gray-700 text-lg">
@@ -64,10 +67,12 @@ function ProductDetail() {
                      onClick={() => {
                         setCart([...cart, product]);
                         toast.success('Đã thêm vào giỏ hàng!');
+                        
                      }}
                      className=" bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-full   text-white p-2 mt-8  border-gray-200 rounded-lg"
                   >
                      Thêm vào giỏ hàng
+                     
                   </button>
                </div>
             </div>

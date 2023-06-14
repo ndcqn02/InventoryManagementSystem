@@ -9,7 +9,6 @@ import {
    CardBody,
    Chip,
    CardFooter,
-   Avatar,
    IconButton,
    Tooltip,
 } from '@material-tailwind/react';
