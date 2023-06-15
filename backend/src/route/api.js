@@ -1,12 +1,16 @@
 import express from "express";
 import apiCustomerController from "../controllers/apiCustomerController";
 import apiManagerController from "../controllers/apiManagerController";
+import apiUser from '../controllers/apiUser'
 
 let router = express.Router();
 
 const initAPIRoute = (app) => {
   router.get("/test", apiCustomerController.testHehe);
   
+  //user
+  router.post('/login', apiUser.login)
+
   //dat hang
   router.get("/all-product", apiCustomerController.getAllProduct);
   router.get("/product-detail/:maSanPham", apiCustomerController.getProductDetail);

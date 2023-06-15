@@ -4,14 +4,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { totalItemsCart } from '../../../redux/counter';
 
-const customer = {
-   maKhachHang: 'KH01',
-   maTaiKhoan: 'KH02',
-   hoVaTen: 'Nguyễn Đức Cường',
-   sdt: '0987654321',
-   diaChi: 'Quảng Nam',
-   hinhAnh: '',
-};
 
 const currentDateTime = () => {
    const now = new Date();
@@ -26,6 +18,8 @@ const currentDateTime = () => {
 };
 
 const Cart = () => {
+   const customer  = JSON.parse(localStorage.getItem('user'));
+   console.log('at cart customer', customer);
    const [itemsCart, setItemsCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
    const [address, setAddress] = useState(customer.diaChi);
    const [name, setName] = useState(customer.hoVaTen);
